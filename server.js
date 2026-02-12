@@ -36,8 +36,8 @@ app.post("/create-checkout-session", async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:4242/success.html",
-      cancel_url: "http://localhost:4242/booking.html",
+      success_url: "https://safeandsecuremobilenotary.com/success.html",
+      cancel_url: "https://safeandsecuremobilenotary.com/booking.html",
     });
 
     res.json({ url: session.url });
@@ -50,7 +50,6 @@ app.post("/create-checkout-session", async (req, res) => {
 app.listen(4242, () => {
   console.log("✅ Server running on http://localhost:4242");
 });
-
 
 
 
