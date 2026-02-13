@@ -1,84 +1,34 @@
-// ----------------- TIME DROPDOWN -----------------
-const timeSelect = document.getElementById("booking-time");
-
-function populateTimes() {
-  timeSelect.innerHTML = '<option value="">-- Select Time --</option>';
-  
-  for (let hour = 9; hour < 18; hour++) {
-    for (let min = 0; min < 60; min += 30) {
-      let h = hour;
-      let ampm = h >= 12 ? "PM" : "AM";
-      if (h > 12) h -= 12;
-
-      const m = min.toString().padStart(2, "0");
-      const label = `${h}:${m} ${ampm}`;
-
-      const option = document.createElement("option");
-      option.value = label;
-      option.textContent = label;
-      timeSelect.appendChild(option);
-    }
-  }
-}
-
-populateTimes();
-
-// ----------------- TOTAL & DEPOSIT CALC -----------------
-const services = document.querySelectorAll(".service");
-const convenience = document.querySelectorAll(".convenience");
-const travel = document.getElementById("travelDistance");
-
-const totalEl = document.getElementById("total");
-const depositEl = document.getElementById("deposit");
-
-function calculateTotal() {
-  let total = 0;
-
-  services.forEach(cb => cb.checked && (total += Number(cb.dataset.price)));
-  convenience.forEach(cb => cb.checked && (total += Number(cb.dataset.price)));
-  total += Number(travel.selectedOptions[0].dataset.price);
-
-  totalEl.textContent = total.toFixed(2);
-  depositEl.textContent = (total * 0.2).toFixed(2);
-}
-
-// Update total whenever user changes any input
-document.querySelectorAll("input, select").forEach(el =>
-  el.addEventListener("change", calculateTotal)
-);
-
-// Initial calculation
-calculateTotal();
-
-// ----------------- STRIPE PAYMENT -----------------
-const stripe = Stripe("pk_live_xxxxx"); // <-- Replace with your real Stripe publishable key
-
-document.getElementById("stripe-button").addEventListener("click", async () => {
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const date = document.getElementById("booking-date").value;
-  const time = timeSelect.value;
-  const total = Number(totalEl.textContent);
-
-  if (!name || !email || !date || !time || total <= 0) {
-    alert("Please complete all fields and select services.");
-    return;
-  }
-
-  const deposit = Math.round(total * 0.2 * 100); // Stripe uses cents
-
+app.post("/create-checkout-session", async (req, res) => {
   try {
-    const res = await fetch("https://stripe-backend-1-lykz.onrender.com/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ total: deposit, name, email, date, time })
+    const { total, name, email, date, time } = req.body;
+
+    if (!total || total <= 0) {
+      return res.status(400).json({ error: "Invalid total amount." });
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: `Booking for ${name} - ${date} at ${time}`,
+            },
+            unit_amount: total, // in cents
+          },
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      success_url: `https://safeandsecuremobilenotary.com/success.html?name=${encodeURIComponent(name)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&amount=${total}`,
+      cancel_url: "https://safeandsecuremobilenotary.com/booking.html",
+      customer_email: email,
     });
 
-    const session = await res.json();
-    stripe.redirectToCheckout({ sessionId: session.id });
-
+    res.json({ url: session.url });
   } catch (err) {
     console.error(err);
-    alert("Payment failed. Check console for details.");
+    res.status(500).json({ error: "Stripe session creation failed." });
   }
 });
