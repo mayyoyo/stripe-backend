@@ -1,60 +1,84 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+// ----------------- TIME DROPDOWN -----------------
+const timeSelect = document.getElementById("booking-time");
 
-const app = express();
+function populateTimes() {
+  timeSelect.innerHTML = '<option value="">-- Select Time --</option>';
+  
+  for (let hour = 9; hour < 18; hour++) {
+    for (let min = 0; min < 60; min += 30) {
+      let h = hour;
+      let ampm = h >= 12 ? "PM" : "AM";
+      if (h > 12) h -= 12;
 
-// ✅ CORRECT
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+      const m = min.toString().padStart(2, "0");
+      const label = `${h}:${m} ${ampm}`;
 
-app.use(cors());
-app.use(express.json());
-app.use(express.static("public"));
-
-app.post("/create-checkout-session", async (req, res) => {
-  const { name, email, amount } = req.body;
-
-  if (!name || !email || !amount || amount <= 0) {
-    return res.status(400).json({ error: "Invalid request data" });
+      const option = document.createElement("option");
+      option.value = label;
+      option.textContent = label;
+      timeSelect.appendChild(option);
+    }
   }
+}
+
+populateTimes();
+
+// ----------------- TOTAL & DEPOSIT CALC -----------------
+const services = document.querySelectorAll(".service");
+const convenience = document.querySelectorAll(".convenience");
+const travel = document.getElementById("travelDistance");
+
+const totalEl = document.getElementById("total");
+const depositEl = document.getElementById("deposit");
+
+function calculateTotal() {
+  let total = 0;
+
+  services.forEach(cb => cb.checked && (total += Number(cb.dataset.price)));
+  convenience.forEach(cb => cb.checked && (total += Number(cb.dataset.price)));
+  total += Number(travel.selectedOptions[0].dataset.price);
+
+  totalEl.textContent = total.toFixed(2);
+  depositEl.textContent = (total * 0.2).toFixed(2);
+}
+
+// Update total whenever user changes any input
+document.querySelectorAll("input, select").forEach(el =>
+  el.addEventListener("change", calculateTotal)
+);
+
+// Initial calculation
+calculateTotal();
+
+// ----------------- STRIPE PAYMENT -----------------
+const stripe = Stripe("pk_live_xxxxx"); // <-- Replace with your real Stripe publishable key
+
+document.getElementById("stripe-button").addEventListener("click", async () => {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const date = document.getElementById("booking-date").value;
+  const time = timeSelect.value;
+  const total = Number(totalEl.textContent);
+
+  if (!name || !email || !date || !time || total <= 0) {
+    alert("Please complete all fields and select services.");
+    return;
+  }
+
+  const deposit = Math.round(total * 0.2 * 100); // Stripe uses cents
 
   try {
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      payment_method_types: ["card"],
-      customer_email: email,
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: "Mobile Notary – 20% Deposit",
-              description: `Deposit for ${name}`,
-            },
-            unit_amount: amount,
-          },
-          quantity: 1,
-        },
-      ],
-      success_url: "https://safeandsecuremobilenotary.com/success.html",
-      cancel_url: "https://safeandsecuremobilenotary.com/booking.html",
+    const res = await fetch("https://stripe-backend-1-lykz.onrender.com/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ total: deposit, name, email, date, time })
     });
 
-    res.json({ url: session.url });
+    const session = await res.json();
+    stripe.redirectToCheckout({ sessionId: session.id });
+
   } catch (err) {
-    console.error("Stripe error:", err);
-    res.status(500).json({ error: "Stripe session failed" });
+    console.error(err);
+    alert("Payment failed. Check console for details.");
   }
 });
-
-const PORT = process.env.PORT || 4242;
-
-app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-});
-
-
-
-
-
-
