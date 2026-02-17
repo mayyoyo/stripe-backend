@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu - Restaurant</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>📞 <a href="tel:7039670674">703-967-0674</a> | ✉ <a href="mailto:gtalema@gmail.com">gtalema@gmail.com</a> | 🌐 <a href="https://restaurant.com">restaurant.com</a></div>
+  <div class="social-links">
+    <a href="https://facebook.com" target="_blank">👍</a>
+    <a href="https://instagram.com" target="_blank">📸</a>
+    <a href="https://twitter.com" target="_blank">🐦</a>
+  </div>
+  <select id="langSelect">
+    <option value="en">EN</option>
+    <option value="am">AM</option>
+  </select>
+</div>
+
+<!-- HEADER -->
+<!-- <header class="header">
+  <h2><img src="images/logo.png" alt="Logo" class="logo"></h2>
+  <nav class="nav" id="navMenu">
+    <a href="index.html" data-en="Home" data-am="መነሻ">Home</a>
+    <a href="menu.html" class="active" data-en="Menu" data-am="ምናሌ">Menu</a>
+    <a href="order.html" data-en="Order" data-am="ትዕዛዝ">Order</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header> -->
+<header class="header">
+  <h2><img src="images/logo.png" alt="Logo" class="logo"></h2>
+  <nav class="nav" id="navMenu">
+    <a href="index.html" class="active" data-en="Home" data-am="መነሻ">Home</a>
+     <a href="about.html" class="active" data-en="About" data-am="ስለ እኛ">About</a>
+    <a href="menu.html" data-en="Menu" data-am="ምናሌ">Menu</a>
+     <a href="reservation.html" class="active" data-en="Reservation"data-am="መያዣ">Reservation</a>
+    <a href="order.html" data-en="Order" data-am="ትዕዛዝ">Order</a>
+    <a href="contact.html" data-en="Contact" data-am="አግኙን">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header>
+
+<!-- HERO VIDEO -->
+<section class="section-box hero">
+  <video autoplay muted loop class="hero-video">
+    <source src="videos/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-text" data-en="Our Delicious Menu" data-am="የጣፋጭ ምናሌ እይ"></div>
+</section>
+
+<!-- CATEGORY FILTER -->
+<section class="section-box">
+  <h2 data-en="Filter by Category" data-am="በምድብ ይገምግሙ">Filter by Category</h2>
+  <div class="filter-bar">
+    <button onclick="filterMenu('all')" data-en="All" data-am="ሁሉም">All</button>
+    <button onclick="filterMenu('meat')" data-en="Meat" data-am="ሥጋ">Meat</button>
+    <button onclick="filterMenu('vegetable')" data-en="Vegetable" data-am="አትክልት">Vegetable</button>
+    <button onclick="filterMenu('seafood')" data-en="Seafood" data-am="የባህር ምግብ">Seafood</button>
+    <button onclick="filterMenu('drink')" data-en="Drinks" data-am="መጠጦች">Drinks</button>
+    <button onclick="filterMenu('dessert')" data-en="Desserts" data-am="ዳዘርት">Desserts</button>
+  </div>
+</section>
+
+<!-- MENU CARDS -->
+<section class="section-box cards-container">
+  <!-- MEAT -->
+  <div class="card" data-category="meat">
+    <img src="images/placeholder.jpg" alt="Grilled Chicken">
+    <h3 data-en="Grilled Chicken" data-am="ጥብስ ዶሮ">Grilled Chicken</h3>
+    <p>$12.99</p>
+    <button class="btn" onclick="addToCart('Grilled Chicken',12.99,'meat')" data-en="Add" data-am="አክል">Add</button>
+  </div>
+
+  <div class="card" data-category="meat">
+    <img src="images/placeholder.jpg" alt="Beef Steak">
+    <h3 data-en="Beef Steak" data-am="የበሬ ስቴክ">Beef Steak</h3>
+    <p>$15.99</p>
+    <button class="btn" onclick="addToCart('Beef Steak',15.99,'meat')" data-en="Add" data-am="አክል">Add</button>
+  </div>
+
+  <!-- VEGETABLE -->
+  <div class="card" data-category="vegetable">
+    <img src="images/placeholder.jpg" alt="Veggie Pasta">
+    <h3 data-en="Veggie Pasta" data-am="አትክልት ፓስታ">Veggie Pasta</h3>
+    <p>$10.99</p>
+    <button class="btn" onclick="addToCart('Veggie Pasta',10.99,'vegetable')" data-en="Add" data-am="አክል">Add</button>
+  </div>
+
+  <!-- SEAFOOD -->
+  <div class="card" data-category="seafood">
+    <img src="images/placeholder.jpg" alt="Grilled Salmon">
+    <h3 data-en="Grilled Salmon" data-am="ሳልሞን">Grilled Salmon</h3>
+    <p>$14.99</p>
+    <button class="btn" onclick="addToCart('Grilled Salmon',14.99,'seafood')" data-en="Add" data-am="አክል">Add</button>
+  </div>
+
+  <!-- DRINKS -->
+  <div class="card" data-category="drink">
+    <img src="images/placeholder.jpg" alt="Coca Cola">
+    <h3 data-en="Coca Cola" data-am="ኮካ ኮላ">Coca Cola</h3>
+    <p>$2.99</p>
+    <button class="btn" onclick="addToCart('Coca Cola',2.99,'drink')" data-en="Add" data-am="አክል">Add</button>
+  </div>
+
+  <div class="card" data-category="drink">
+    <img src="images/placeholder.jpg" alt="Hot Coffee">
+    <h3 data-en="Hot Coffee" data-am="ቡና ሙቀት">Hot Coffee</h3>
+    <p>$3.99</p>
+    <button class="btn" onclick="addToCart('Hot Coffee',3.99,'drink')" data-en="Add" data-am="አክል">Add</button>
+  </div>
+
+  <!-- DESSERTS -->
+  <div class="card" data-category="dessert">
+    <img src="images/placeholder.jpg" alt="Chocolate Cake">
+    <h3 data-en="Chocolate Cake" data-am="ቸኮሌት ኬክ">Chocolate Cake</h3>
+    <p>$4.99</p>
+    <button class="btn" onclick="addToCart('Chocolate Cake',4.99,'dessert')" data-en="Add" data-am="አክል">Add</button>
+  </div>
+</section>
+
+<!-- STICKY CART -->
+<aside class="sticky-cart section-box">
+  <h3 data-en="Cart Review" data-am="ጋርታ ግምገማ">Cart Review</h3>
+  <div id="cartItems"></div>
+  <p><strong data-en="Total:" data-am="ጠቅላላ፡">Total:</strong> $<span id="cartTotal">0.00</span></p>
+  <a href="order.html" class="btn" data-en="Finalize Order" data-am="ትዕዛዝ ያስገቡ">Finalize Order</a>
+</aside>
+
+<!-- FOOTER -->
+<footer class="footer section-box">
+  📞 <a href="tel:7039670674">703-967-0674</a> | ✉ <a href="mailto:gtalema@gmail.com">gtalema@gmail.com</a> | 🌐 <a href="https://restaurant.com">restaurant.com</a>
+  <br>
+  <a href="https://facebook.com" target="_blank">👍</a>
+  <a href="https://instagram.com" target="_blank">📸</a>
+  <a href="https://twitter.com" target="_blank">🐦</a>
+</footer>
+
+<script>
+function toggleMenu(){ document.getElementById("navMenu").classList.toggle("active"); }
+</script>
+
+</body>
+</html>

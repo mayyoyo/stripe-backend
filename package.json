@@ -1,0 +1,21 @@
+{
+  "name": "local-notary-services",
+  "version": "1.0.0",
+  "description": "Safe & Secure Mobile Notary website with booking and Stripe payment",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "nodemailer": "^7.0.13",
+    "stripe": "^20.3.1"
+  },
+  "keywords": []
+}git push -u origin master

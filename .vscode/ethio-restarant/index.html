@@ -1,0 +1,106 @@
+
+
+<!--  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title data-en="Restaurant" data-am="ረስቶራንት">Restaurant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+<!-- ================= TOP BAR ================= -->
+<div class="topbar">
+  <div>📞 <a href="tel:7039670674">703-967-0674</a> | ✉ <a href="mailto:gtalema@gmail.com">gtalema@gmail.com</a> | 🌐 <a href="#">restaurant.com</a></div>
+  <div class="social-links">
+    <a href="https://facebook.com" target="_blank">👍</a>
+    <a href="https://instagram.com" target="_blank">📸</a>
+    <a href="https://twitter.com" target="_blank">🐦</a>
+  </div>
+  <select id="langSelect">
+    <option value="en">EN</option>
+    <option value="am">AM</option>
+  </select>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <h2><img src="images/logo.png" alt="Logo" class="logo"></h2>
+  <nav class="nav" id="navMenu">
+    <a href="index.html" class="active" data-en="Home" data-am="መነሻ">Home</a>
+     <a href="about.html" class="active" data-en="About" data-am="ስለ እኛ">About</a>
+    <a href="menu.html" data-en="Menu" data-am="ምናሌ">Menu</a>
+     <a href="reservation.html" class="active" data-en="Reservation"data-am="መያዣ">Reservation</a>
+    <a href="order.html" data-en="Order" data-am="ትዕዛዝ">Order</a>
+    <a href="contact.html" data-en="Contact" data-am="አግኙን">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header>
+
+<!-- ================= HERO VIDEO ================= -->
+<section class="section-box hero">
+  <video autoplay muted loop class="hero-video">
+    <source src="videos/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-text" data-en="Welcome to Our Restaurant" data-am="እንኳን ወደ ረስቶራንታችን በደህና መጡ"></div>
+</section>
+
+<!-- ================= CARDS SECTIONS ================= -->
+<section class="section-box cards-container">
+
+  <!-- MENU CARD -->
+  <div class="card">
+    <img src="images/placeholder.jpg" alt="Menu">
+    <h3 data-en="View Full Menu" data-am="ሙሉ ምናሌ ይመልከቱ">View Full Menu</h3>
+    <p data-en="Check your cart and place your order." data-am="ጋርታዎን ይፈትሹ እና ትዕዛዝዎን ይስጡ">Check your cart and place your order.</p>
+    <a href="menu.html" class="btn" data-en="Go to Menu" data-am="ወደ ምናሌ ይሂዱ">Go to Menu</a>
+  </div>
+
+  <!-- ORDER CARD -->
+  <div class="card">
+    <img src="images/placeholder.jpg" alt="Order">
+    <h3 data-en="Order" data-am="ትዕዛዝ">Order</h3>
+    <p data-en="Check your cart and place your order." data-am="ጋርታዎን ይፈትሹ እና ትዕዛዝዎን ይስጡ">Check your cart and place your order.</p>
+    <a href="order.html" class="btn" data-en="Go to Order Page" data-am="ወደ ትዕዛዝ ገጽ ይሂዱ">Go to Order Page</a>
+  </div>
+
+  <!-- ABOUT CARD -->
+  <div class="card">
+    <img src="images/placeholder.jpg" alt="About Us">
+    <h3 data-en="About Us" data-am="ስለ እኛ">About Us</h3>
+    <p data-en="We serve the freshest ingredients with love and care." data-am="እኛ በፍቅርና እንኳን የተዘጋጀ እና እንኳን እንሰጣለን">We serve the freshest ingredients with love and care.</p>
+    <a href="index.html#about" class="btn" data-en="Read More" data-am="ተጨማሪ ያነቡ">Read More</a>
+  </div>
+
+  <!-- CONTACT CARD -->
+  <div class="card">
+    <img src="images/placeholder.jpg" alt="Contact">
+    <h3 data-en="Contact" data-am="አግኙን">Contact</h3>
+    <p data-en="Call, email, or visit us." data-am="ይደውሉ፣ ኢሜይል ይላኩ ወይም ይጎብኙን">Call, email, or visit us.</p>
+    <a href="contact.html" class="btn" data-en="Contact Page" data-am="የእርስዎ ገጽ ይጎብኙ">Contact Page</a>
+  </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer section-box">
+  📞 <a href="tel:7039670674">703-967-0674</a> | ✉ <a href="mailto:gtalema@gmail.com">gtalema@gmail.com</a> | 🌐 <a href="#">restaurant.com</a>
+  <br>
+  <a href="https://facebook.com" target="_blank">👍</a>
+  <a href="https://instagram.com" target="_blank">📸</a>
+  <a href="https://twitter.com" target="_blank">🐦</a>
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navMenu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
+

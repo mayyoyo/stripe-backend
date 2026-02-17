@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Safe & Secure Mobile Notary</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div style="background:#111; color:#fff; text-align:center; padding:8px; font-size:14px;">
+    📞 703-967-0674 | 📧 safeandsecuremobilenotary@gmail.com | 🌐 safeandsecuremobilenotary.com |
+    📘 Facebook | 📸 Instagram | 💼 LinkedIn
+  </div>
+  <div class="header-container">
+    <div class="logo">Safe & Secure Mobile Notary</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active');">
+        <div></div><div></div><div></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <video autoplay muted loop class="hero-video">
+    <source src="hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Contact Us</h1>
+    <p>Get in touch with Safe & Secure Mobile Notary</p>
+  </div>
+</section>
+
+<section>
+  <div class="cards-container">
+    <div class="card">
+      <h3>Phone</h3>
+      <p>703-967-0674</p>
+      <a href="tel:7039670674"><button>Call Now</button></a>
+    </div>
+    <div class="card">
+      <h3>Email</h3>
+      <p>safeandsecuremobilenotary@gmail.com</p>
+      <a href="mailto:safeandsecuremobilenotary@gmail.com"><button>Email Us</button></a>
+    </div>
+    <div class="card">
+      <h3>Website</h3>
+      <p>safeandsecuremobilenotary.com</p>
+      <a href="index.html"><button>Visit Site</button></a>
+    </div>
+    <div class="card">
+      <h3>Location</h3>
+      <p>Your City, State</p>
+      <a href="https://goo.gl/maps/YourMapLink" target="_blank"><button>View Map</button></a>
+    </div>
+    <div class="card">
+      <h3>Request Form</h3>
+      <form id="contactForm">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email" required>
+        <textarea placeholder="Message / Request" required></textarea>
+        <button type="submit">Send Request</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>🌐 safeandsecuremobilenotary.com | 📞 703-967-0674 | 📘 Facebook | 📸 Instagram | 💼 LinkedIn</p>
+  <p>© 2026 Safe & Secure Mobile Notary</p>
+</footer>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  alert("Your request has been submitted!");
+});
+</script>
+
+</body>
+</html>

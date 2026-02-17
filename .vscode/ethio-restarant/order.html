@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order - Restaurant</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>📞 <a href="tel:7039670674">703-967-0674</a> | ✉ <a href="mailto:gtalema@gmail.com">gtalema@gmail.com</a> | 🌐 <a href="https://restaurant.com">restaurant.com</a></div>
+  <div class="social-links">
+    <a href="https://facebook.com" target="_blank">👍</a>
+    <a href="https://instagram.com" target="_blank">📸</a>
+    <a href="https://twitter.com" target="_blank">🐦</a>
+  </div>
+  <select id="langSelect">
+    <option value="en">EN</option>
+    <option value="am">AM</option>
+  </select>
+</div>
+
+<!-- HEADER -->
+<!-- <header class="header">
+  <h2><img src="images/logo.png" alt="Logo" class="logo"></h2>
+  <nav class="nav" id="navMenu">
+    <a href="index.html" data-en="Home" data-am="መነሻ">Home</a>
+    <a href="menu.html" data-en="Menu" data-am="ምናሌ">Menu</a>
+    <a href="order.html" class="active" data-en="Order" data-am="ትዕዛዝ">Order</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header> -->
+<header class="header">
+  <h2><img src="images/logo.png" alt="Logo" class="logo"></h2>
+  <nav class="nav" id="navMenu">
+    <a href="index.html" class="active" data-en="Home" data-am="መነሻ">Home</a>
+     <a href="about.html" class="active" data-en="About" data-am="ስለ እኛ">About</a>
+    <a href="menu.html" data-en="Menu" data-am="ምናሌ">Menu</a>
+     <a href="reservation.html" class="active" data-en="Reservation"data-am="መያዣ">Reservation</a>
+    <a href="order.html" data-en="Order" data-am="ትዕዛዝ">Order</a>
+    <a href="contact.html" data-en="Contact" data-am="አግኙን">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header>
+
+<!-- ORDER CART -->
+<section class="section-box">
+  <h2 data-en="Your Cart" data-am="ጋርታዎ">Your Cart</h2>
+  <div id="cart-items">
+    <!-- JS populates items -->
+  </div>
+  <p><strong data-en="Total:" data-am="ጠቅላላ፡"></strong> $<span id="orderTotal">0.00</span></p>
+</section>
+
+<!-- PAYMENT FORM -->
+<section class="section-box">
+  <h2 data-en="Payment" data-am="ክፍያ">Payment</h2>
+  <form id="paymentForm">
+    <label data-en="Cardholder Name" data-am="የካርድ ባለቤት ስም"></label>
+    <input type="text" id="cardName" placeholder="Your Name" required>
+
+    <label data-en="Card Number" data-am="የካርድ ቁጥር"></label>
+    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+
+    <label data-en="Expiration Date" data-am="የማስተናገድ ቀን"></label>
+    <input type="text" id="expDate" placeholder="MM/YY" required>
+
+    <label data-en="CVV" data-am="አረጋግጥ ኮድ"></label>
+    <input type="text" id="cvv" placeholder="123" required>
+
+    <button type="submit" class="btn" data-en="Place Order" data-am="ትዕዛዝ ያስገቡ">Place Order</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer section-box">
+  📞 <a href="tel:7039670674">703-967-0674</a> | ✉ <a href="mailto:gtalema@gmail.com">gtalema@gmail.com</a> | 🌐 <a href="https://restaurant.com">restaurant.com</a>
+  <br>
+  <a href="https://facebook.com" target="_blank">👍</a>
+  <a href="https://instagram.com" target="_blank">📸</a>
+  <a href="https://twitter.com" target="_blank">🐦</a>
+</footer>
+
+<script>
+function toggleMenu(){ document.getElementById("navMenu").classList.toggle("active"); }
+</script>
+
+</body>
+</html>

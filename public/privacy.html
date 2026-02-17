@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy - Springfield Mobile Notary</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="top-bar" id="top">
+  📞 <a href="tel:+17039670674">703-967-0674</a> |
+  ✉️ <a href="mailto:gettal535@gmail.com">gettal535@gmail.com</a> |
+  🌐 <a href="/">Website</a>
+</div>
+
+<nav class="navbar sticky">
+  <a href="index.html">
+    <video class="logo-video" autoplay muted loop>
+      <source src="video/logo_for_multimedia_portfolio_project.mp4" type="video/mp4">
+    </video>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="booking.html">Book Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="hero">
+  <video autoplay muted loop class="hero-video">
+    <source src="video/multimedia.mp4" type="video/mp4">
+  </video>
+  <div class="hero-text">
+    <h1>Privacy Policy</h1>
+    <p>Your privacy is important to us</p>
+  </div>
+</section>
+
+<section class="cards">
+  <div class="card" style="background-color:#1e90ff;">
+    <h3>Data Collection</h3>
+    <p>We only collect information necessary to complete your appointment and payment.</p>
+  </div>
+  <div class="card" style="background-color:#ff6347;">
+    <h3>Security</h3>
+    <p>All sensitive information is encrypted and processed securely via Stripe.</p>
+  </div>
+</section>
+
+<footer>
+  📞 <a href="tel:+17039670674">703-967-0674</a> |
+  ✉️ <a href="mailto:gettal535@gmail.com">gettal535@gmail.com</a> |
+  🌐 <a href="/">Website</a>
+  <p>© 2026 Springfield Mobile Notary | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a></p>
+  <p><a href="#top">Back to Top</a></p>
+</footer>
+
+<script src="js/script.js"></script>
+<!--  -->
+<script>
+  const hamburger = document.querySelector(".hamburger");
+  const navLinks = document.querySelector(".nav-links");
+
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("open");
+    navLinks.classList.toggle("active");
+  });
+</script>
+<!--  -->
+</body>
+</html>

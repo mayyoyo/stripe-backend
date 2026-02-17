@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+ <div>
+    <a href="tel:7039670674">📞 703-967-0674</a> |
+    <a href="mailto:gtalema@gmail.com">✉ gtalema@gmail.com</a> |
+    <a href="https://restaurant.com" target="_blank">🌐 restaurant.com</a>
+  </div>
+  <select id="langSelect">
+    <option value="en">EN</option>
+    <option value="am">AM</option>
+  </select>
+</div>
+
+<!-- Header / Navbar -->
+<!-- <header class="header">
+  <div class="logo">
+    <video src="images/logo-video.mp4" autoplay muted loop></video>
+  </div>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="menu.html">Menu</a>
+    <a href="reservation.html">Reservation</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header> -->
+<header class="header">
+  <h2><img src="images/logo.png" alt="Logo" class="logo"></h2>
+  <nav class="nav" id="navMenu">
+    <a href="index.html" class="active" data-en="Home" data-am="መነሻ">Home</a>
+     <a href="about.html" class="active" data-en="About" data-am="ስለ እኛ">About</a>
+    <a href="menu.html" data-en="Menu" data-am="ምናሌ">Menu</a>
+     <a href="reservation.html" class="active" data-en="Reservation"data-am="መያዣ">Reservation</a>
+    <a href="order.html" data-en="Order" data-am="ትዕዛዝ">Order</a>
+    <a href="contact.html" data-en="Contact" data-am="አግኙን">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header>
+<!--  -->
+
+<!-- Hero Section -->
+<section class="hero">
+  <video src="images/hero-video.mp4" autoplay muted loop></video>
+  <div class="hero-text">
+    <h1 data-en="About Us" data-am="ስለ እኛ">About Us</h1>
+    <p data-en="Discover our story and chefs" data-am="ታሪኳችንን እና ምግብ አባላትን ያውቁ">Discover our story and chefs</p>
+  </div>
+</section>
+
+<!-- About Cards -->
+<section class="cards-container">
+  <div class="card">
+    <img src="images/placeholder.jpg" alt="Our History">
+    <h3 data-en="Our History" data-am="ታሪኳችን">Our History</h3>
+    <p data-en="Learn how our restaurant started and grew" data-am="ምግብ ቤታችን እንዴት ጀመረና እንዴት ተወዳጅ ሆነ ያውቁ">Learn how our restaurant started and grew</p>
+    <a href="#history" class="btn" data-en="Read More" data-am="ተጨማሪ ያውቁ">Read More</a>
+  </div>
+
+  <div class="card">
+    <img src="images/placeholder.jpg" alt="Our Chefs">
+    <h3 data-en="Our Chefs" data-am="ምግብ አባላት">Our Chefs</h3>
+    <p data-en="Meet the talented chefs behind our dishes" data-am="በምግቦቻችን የሚሰሩ ብልጥ ምግብ አባላትን ያውቁ">Meet the talented chefs behind our dishes</p>
+    <a href="#chefs" class="btn" data-en="Meet Them" data-am="ያገኙ">Meet Them</a>
+  </div>
+
+  <div class="card">
+    <img src="images/placeholder.jpg" alt="Our Values">
+    <h3 data-en="Our Values" data-am="እሴቶቻችን">Our Values</h3>
+    <p data-en="Quality, freshness, and customer satisfaction" data-am="ጥራት፣ ንፁህነት እና ደንበኞች ማረጋገጫ">Quality, freshness, and customer satisfaction</p>
+    <a href="#values" class="btn" data-en="Learn More" data-am="ተጨማሪ ያውቁ">Learn More</a>
+  </div>
+</section>
+
+<footer class="footer section-box">
+
+   <div>
+    <a href="tel:7039670674">📞 703-967-0674</a> |
+    <a href="mailto:gtalema@gmail.com">✉ gtalema@gmail.com</a> |
+    <a href="https://restaurant.com" target="_blank">🌐 restaurant.com</a>
+  </div>
+  <a href="https://facebook.com" target="_blank">👍</a>
+  <a href="https://instagram.com" target="_blank">📸</a>
+  <a href="https://twitter.com" target="_blank">🐦</a>
+</footer>
+
+</body>
+</html>

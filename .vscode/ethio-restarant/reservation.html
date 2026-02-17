@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reservation</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div>
+    <a href="tel:7039670674">📞 703-967-0674</a> |
+    <a href="mailto:gtalema@gmail.com">✉ gtalema@gmail.com</a> |
+    <a href="https://restaurant.com" target="_blank">🌐 restaurant.com</a>
+  </div>
+  <select id="langSelect">
+    <option value="en">EN</option>
+    <option value="am">AM</option>
+  </select>
+</div>
+
+<!-- Header -->
+<!-- <header class="header">
+  <div class="logo">
+    <video src="images/logo-video.mp4" autoplay muted loop></video>
+  </div>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="menu.html">Menu</a>
+    <a href="reservation.html" class="active">Reservation</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header> -->
+<header class="header">
+  <h2><img src="images/logo.png" alt="Logo" class="logo"></h2>
+  <nav class="nav" id="navMenu">
+    <a href="index.html" class="active" data-en="Home" data-am="መነሻ">Home</a>
+     <a href="about.html" class="active" data-en="About" data-am="ስለ እኛ">About</a>
+    <a href="menu.html" data-en="Menu" data-am="ምናሌ">Menu</a>
+     <a href="reservation.html" class="active" data-en="Reservation"data-am="መያዣ">Reservation</a>
+    <a href="order.html" data-en="Order" data-am="ትዕዛዝ">Order</a>
+    <a href="contact.html" data-en="Contact" data-am="አግኙን">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <video src="images/hero-video.mp4" autoplay muted loop></video>
+  <div class="hero-text">
+    <h1 data-en="Reserve a Table" data-am="ሰሌዳ ይያዙ">Reserve a Table</h1>
+    <p data-en="Book your spot easily online" data-am="ቀጥታ ሰሌዳ ይያዙ">Book your spot easily online</p>
+  </div>
+</section>
+
+<!-- Reservation Form Card -->
+<section class="cards-container">
+  <div class="card">
+    <h3 data-en="Reservation Form" data-am="የሰሌዳ ቅጽ">Reservation Form</h3>
+    <form id="reservationForm">
+      <label data-en="Your Name" data-am="ስም" for="name"></label>
+      <input type="text" id="name" name="name" placeholder="Your Name" data-en="Your Name" data-am="ስም" required>
+
+      <label data-en="Email" data-am="ኢሜይል" for="email"></label>
+      <input type="email" id="email" name="email" placeholder="Your Email" data-en="Your Email" data-am="ኢሜይል" required>
+
+      <label data-en="Phone" data-am="ስልክ" for="phone"></label>
+      <input type="tel" id="phone" name="phone" placeholder="Phone Number" data-en="Phone Number" data-am="ስልክ" required>
+
+      <label data-en="Date" data-am="ቀን" for="date"></label>
+      <input type="date" id="date" name="date" required>
+
+      <label data-en="Time" data-am="ሰዓት" for="time"></label>
+      <input type="time" id="time" name="time" required>
+
+      <label data-en="Guests" data-am="እንግዶች" for="guests"></label>
+      <input type="number" id="guests" name="guests" placeholder="Number of Guests" data-en="Number of Guests" data-am="እንግዶች" required>
+
+      <button class="btn" type="submit" data-en="Reserve Now" data-am="አሁን ይያዙ">Reserve Now</button>
+    </form>
+  </div>
+</section>
+<!-- ================= FOOTER ================= -->
+<footer class="footer section-box">
+
+   <div>
+    <a href="tel:7039670674">📞 703-967-0674</a> |
+    <a href="mailto:gtalema@gmail.com">✉ gtalema@gmail.com</a> |
+    <a href="https://restaurant.com" target="_blank">🌐 restaurant.com</a>
+  </div>
+  <a href="https://facebook.com" target="_blank">👍</a>
+  <a href="https://instagram.com" target="_blank">📸</a>
+  <a href="https://twitter.com" target="_blank">🐦</a>
+</footer>
+
+</body>
+</html>

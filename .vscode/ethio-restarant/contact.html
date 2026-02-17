@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div>
+    <a href="tel:7039670674">📞 703-967-0674</a> |
+    <a href="mailto:gtalema@gmail.com">✉ gtalema@gmail.com</a> |
+    <a href="https://restaurant.com" target="_blank">🌐 restaurant.com</a>
+  </div>
+  <select id="langSelect">
+    <option value="en">EN</option>
+    <option value="am">AM</option>
+  </select>
+</div>
+
+<!-- Header -->
+<!-- <header class="header">
+  <div class="logo">
+    <video src="images/logo-video.mp4" autoplay muted loop></video>
+  </div>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="menu.html">Menu</a>
+    <a href="reservation.html">Reservation</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header> -->
+<header class="header">
+  <h2><img src="images/logo.png" alt="Logo" class="logo"></h2>
+  <nav class="nav" id="navMenu">
+    <a href="index.html" class="active" data-en="Home" data-am="መነሻ">Home</a>
+     <a href="about.html" class="active" data-en="About" data-am="ስለ እኛ">About</a>
+    <a href="menu.html" data-en="Menu" data-am="ምናሌ">Menu</a>
+     <a href="reservation.html" class="active" data-en="Reservation"data-am="መያዣ">Reservation</a>
+    <a href="order.html" data-en="Order" data-am="ትዕዛዝ">Order</a>
+    <a href="contact.html" data-en="Contact" data-am="አግኙን">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <video src="images/hero-video.mp4" autoplay muted loop></video>
+  <div class="hero-text">
+    <h1 data-en="Contact Us" data-am="እኛን ያነጋግሩ">Contact Us</h1>
+    <p data-en="We would love to hear from you" data-am="ከእርስዎ የምንሰማው እናም እንደምንደርስ">We would love to hear from you</p>
+  </div>
+</section>
+
+  <section class="section-box contact-section">
+  <h2 data-en="Contact Us" data-am="አግኙን">Contact Us</h2>
+  <form id="contactForm">
+    <label data-en="Your Name" data-am="ስም" for="contactName"></label>
+    <input type="text" id="contactName" placeholder="Your Name" data-en="Your Name" data-am="ስም" required>
+
+    <label data-en="Your Email" data-am="ኢሜይል" for="contactEmail"></label>
+    <input type="email" id="contactEmail" placeholder="you@example.com" data-en="Your Email" data-am="ኢሜይል" required>
+
+    <label data-en="Message" data-am="መልዕክት" for="contactMessage"></label>
+    <textarea id="contactMessage" placeholder="Type your message..." data-en="Message" data-am="መልዕክት" rows="5" required></textarea>
+
+    <button type="submit" class="btn" data-en="Send Email" data-am="ኢሜይል ላክ">Send Email</button>
+  </form>
+</section>
+
+</section>
+<!--  -->
+<!-- Contact Cards -->
+<section class="cards-container">
+  <div class="card">
+    <h3 data-en="Our Location" data-am="ቦታችን">Our Location</h3>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+  <div class="card">
+    <h3 data-en="Email & Phone" data-am="ኢሜይል እና ስልክ">Email & Phone</h3>
+    <p>📞 +1 555-1234</p>
+    <p>✉ info@restaurant.com</p>
+    <p>🌐 www.restaurant.com</p>
+  </div>
+
+  <div class="card">
+    <h3 data-en="Follow Us" data-am="ተከታትሉን">Follow Us</h3>
+    <p>👍 Facebook | 🐦 Twitter | 📸 Instagram</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer section-box">
+
+   <div>
+    <a href="tel:7039670674">📞 703-967-0674</a> |
+    <a href="mailto:gtalema@gmail.com">✉ gtalema@gmail.com</a> |
+    <a href="https://restaurant.com" target="_blank">🌐 restaurant.com</a>
+  </div>
+  <a href="https://facebook.com" target="_blank">👍</a>
+  <a href="https://instagram.com" target="_blank">📸</a>
+  <a href="https://twitter.com" target="_blank">🐦</a>
+</footer>
+
+</body>
+</html>
