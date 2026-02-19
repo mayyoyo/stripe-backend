@@ -1,57 +1,82 @@
-// public/js/script.js
+document.addEventListener("DOMContentLoaded", () => {
 
-// Only run this code on booking page
-if (document.getElementById("stripe-button")) {
-
-  // Initialize Stripe with your PUBLIC key
-  const stripe = Stripe("pk_live_51Nwbk6BdpYMd8RZYKtCvz8VPQjFQCZbmcJ3y3tj2bNxyAd4xv9Ey3fnREYyYeTbR0i26CdD3W5VUiYdJizmLP4J000bNKolpY3"); // ⚠️ Replace with your live public key
+  // Fill time dropdown
+  const bookingTime = document.getElementById("booking-time");
+  const times = ["09:00 AM","10:00 AM","11:00 AM","12:00 PM","01:00 PM","02:00 PM","03:00 PM","04:00 PM","05:00 PM"];
+  times.forEach(t => {
+    const option = document.createElement("option");
+    option.value = t;
+    option.textContent = t;
+    bookingTime.appendChild(option);
+  });
 
   const payBtn = document.getElementById("stripe-button");
+  if (!payBtn) return;
 
-  // Example: calculate total (if you have services or options)
+  const stripe = Stripe("pk_live_51Nwbk6BdpYMd8RZYKtCvz8VPQjFQCZbmcJ3y3tj2bNxyAd4xv9Ey3fnREYyYeTbR0i26CdD3W5VUiYdJizmLP4J000bNKolpY3");
+
   function calculateTotal() {
     let total = 0;
+    document.querySelectorAll(".service:checked").forEach(cb => total += parseInt(cb.dataset.price));
+    document.querySelectorAll(".convenience:checked").forEach(cb => total += parseInt(cb.dataset.price));
+    const travel = document.getElementById("travelDistance");
+    if (travel && travel.selectedOptions.length > 0) total += parseInt(travel.selectedOptions[0].dataset.price || 0);
 
-    // Example: sum up selected services (if you have checkboxes)
-    const serviceCheckboxes = document.querySelectorAll(".service-checkbox");
-    serviceCheckboxes.forEach(cb => {
-      if (cb.checked) {
-        total += parseInt(cb.dataset.amount); // amount in cents
-      }
-    });
-
+    document.getElementById("total").textContent = total;
+    document.getElementById("deposit").textContent = Math.ceil(total * 0.2);
     return total;
   }
+
+  document.querySelectorAll(".service, .convenience, #travelDistance")
+    .forEach(el => el.addEventListener("change", calculateTotal));
 
   payBtn.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    const amount = calculateTotal() || 1000; // default 1000 cents ($10) if nothing selected
-    const customerName = document.getElementById("customer-name").value || "John Doe";
-    const customerEmail = document.getElementById("customer-email").value || "john@example.com";
+    const total = calculateTotal();
+    const deposit = Math.ceil(total * 0.2);
+    const amountInCents = deposit * 100;
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    if (!name || !email) { alert("Enter name and email"); return; }
+
+    const services = [
+      ...document.querySelectorAll(".service:checked"),
+      ...document.querySelectorAll(".convenience:checked")
+    ].map(cb => cb.parentElement.textContent.trim());
+
+    const travelOption = document.getElementById("travelDistance").selectedOptions[0];
+    if (travelOption) services.push(travelOption.textContent.trim());
 
     try {
-      const response = await fetch("https://safe-notary-backend.onrender.com/create-checkout-session", {
+      console.log("Sending request to backend...");
+      const response = await fetch("http://localhost:3000/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          amount: amount,
-          customerName: customerName,
-          customerEmail: customerEmail
+        body: JSON.stringify({
+          amount: amountInCents,
+          customerName: name,
+          customerEmail: email,
+          services: services
         })
       });
 
       const data = await response.json();
+      console.log("Response from backend:", data);
 
       if (data.id) {
-        // Redirect to Stripe Checkout
-        await stripe.redirectToCheckout({ sessionId: data.id });
+        stripe.redirectToCheckout({ sessionId: data.id });
       } else {
-        alert("Failed to create Stripe session.");
+        alert("Payment session failed: " + (data.error || "Unknown error"));
       }
+
     } catch (err) {
-      console.error("Error:", err);
-      alert("Something went wrong. Check console for details.");
+      console.error(err);
+      alert("Payment error: " + err.message);
     }
   });
-}
+
+  calculateTotal();
+
+});

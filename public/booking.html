@@ -4,26 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Booking | Safe & Secure Mobile Notary</title>
-
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://js.stripe.com/v3/"></script>
 <script src="js/script.js" defer></script>
 </head>
-
 <body>
 
 <!-- TOP BAR -->
 <div class="top-bar">
   📞 <a href="tel:7039670674">703-967-0674</a> |
   📧 <a href="mailto:info@safeandsecuremobilenotary.com">info@safeandsecuremobilenotary.com</a> |
-  🌐 <a href="#">safeandsecuremobilenotary.com</a>
+  🌐 <a href="https://safeandsecuremobilenotary.com" target="_blank">safeandsecuremobilenotary.com</a> |
+  📘 <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+  📸 <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+  💼 <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
 </div>
 
 <!-- HEADER -->
 <header>
   <div class="header-container">
     <div class="logo">
-      <a href="index.html">Safe & Secure Mobile Notary</a>
+      <a href="index.html"><img src="images/logo.png" alt="Logo" class="logo-img"></a>
+      Safe & Secure Mobile Notary
     </div>
     <nav>
       <ul class="nav-links">
@@ -35,100 +38,87 @@
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active');">
+        <div></div><div></div><div></div>
+      </div>
     </nav>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero small-hero">
+<!-- HERO SECTION -->
+<section class="hero">
+  <video autoplay muted loop class="hero-video">
+    <source src="video/hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1>Book Your Appointment</h1>
-    <p>Secure your appointment with a 20% deposit</p>
+    <h1>Book Your Mobile Notary Appointment</h1>
+    <p>Professional • Reliable • Secure</p>
   </div>
 </section>
 
-<!-- BOOKING SECTION -->
-<section class="booking-section">
+<!-- BOOKING CARDS -->
+<section class="cards-section">
   <div class="cards-container">
 
-    <!-- CUSTOMER INFO -->
+    <!-- Customer Info -->
     <div class="modern-card green">
-      <h3>Customer Information</h3>
-      <input type="text" id="name" placeholder="Full Name" required>
-      <input type="email" id="email" placeholder="Email Address" required>
-      <input type="tel" id="phone" placeholder="Phone Number" required>
+      <h3>Customer Info</h3>
+      <input type="text" id="name" placeholder="Full Name">
+      <input type="email" id="email" placeholder="Email Address">
     </div>
 
-    <!-- DATE & TIME -->
-    <div class="modern-card orange">
-      <h3>Select Date & Time</h3>
+    <!-- Date & Time -->
+    <div class="modern-card blue">
+      <h3>Date & Time</h3>
       <label>Date:</label>
-      <input type="date" id="booking-date" required>
-
+      <input type="date" id="booking-date">
       <label>Time:</label>
-      <select id="booking-time" required>
+      <select id="booking-time">
         <option value="">-- Select Time --</option>
-        <option>9:00 AM</option>
-        <option>10:00 AM</option>
-        <option>11:00 AM</option>
-        <option>12:00 PM</option>
-        <option>1:00 PM</option>
-        <option>2:00 PM</option>
-        <option>3:00 PM</option>
-        <option>4:00 PM</option>
-        <option>5:00 PM</option>
-        <option>6:00 PM</option>
-        <option>7:00 PM</option>
-        <option>8:00 PM</option>
       </select>
     </div>
 
-    <!-- SERVICES -->
-    <div class="modern-card blue">
-      <h3>Select Services</h3>
+    <!-- Services -->
+    <div class="modern-card teal">
+      <h3>Services</h3>
       <label><input type="checkbox" class="service" data-price="10"> General Notary ($10 per signature)</label>
-      <label><input type="checkbox" class="service" data-price="150"> Loan Signing ($150 average)</label>
+      <label><input type="checkbox" class="service" data-price="150"> Loan Signing ($125–$175)</label>
       <label><input type="checkbox" class="service" data-price="50"> Hospital / Jail Visit ($50)</label>
     </div>
 
-    <!-- TRAVEL FEES -->
-    <div class="modern-card teal">
+    <!-- Travel Fee -->
+    <div class="modern-card orange">
       <h3>Travel Fee</h3>
       <select id="travelDistance">
-        <option data-price="25">0–10 miles ($25)</option>
-        <option data-price="40">11–20 miles ($40)</option>
-        <option data-price="60">21–30 miles ($60)</option>
+        <option value="0" data-price="25">0–10 miles ($25)</option>
+        <option value="1" data-price="40">11–20 miles ($40)</option>
+        <option value="2" data-price="60">21–30 miles ($60)</option>
       </select>
     </div>
 
-    <!-- CONVENIENCE FEES -->
+    <!-- Convenience Fees -->
     <div class="modern-card purple">
       <h3>Convenience Fees</h3>
-      <label><input type="checkbox" class="convenience" data-price="20"> Evening Appointment (+$20)</label>
-      <label><input type="checkbox" class="convenience" data-price="25"> Weekend Appointment (+$25)</label>
-      <label><input type="checkbox" class="convenience" data-price="50"> After 9PM (+$50)</label>
+      <label><input type="checkbox" class="convenience" data-price="20"> Evenings +$20</label>
+      <label><input type="checkbox" class="convenience" data-price="25"> Weekends +$25</label>
+      <label><input type="checkbox" class="convenience" data-price="50"> After 9PM +$50</label>
     </div>
 
-    <!-- TOTAL & PAYMENT -->
-    <div class="modern-card lime">
+    <!-- Cancelation Policy -->
+    <div class="modern-card red">
+      <h3>Cancelation Policy</h3>
+      <p>Cancel 24+ hrs before appointment: $10 fee</p>
+      <p>Cancel within 24 hrs: 50% of total service fee</p>
+      <p>Cancel within 1 hr: 100% of total service fee</p>
+    </div>
+
+    <!-- Total & Deposit -->
+    <div class="modern-card green">
       <h3>Total & Deposit</h3>
-      <p>Total: $<span id="total">0.00</span></p>
-      <p>20% Deposit: $<span id="deposit">0.00</span></p>
-      <button id="stripe-button" class="pay-btn">Pay 20% Deposit</button>
-    </div>
-
-    <!-- BOOKING POLICY -->
-    <div class="modern-card pink">
-      <h3>Booking & Cancellation Policy</h3>
-      <p>✔ 20% deposit required to secure your appointment.</p>
-      <p>✔ Remaining balance due at appointment.</p>
-      <br>
-      <strong>Cancellation Fees:</strong>
-      <ul>
-        <li>24+ hours notice: No fee</li>
-        <li>12–24 hours notice: 50% of service fee</li>
-        <li>Less than 12 hours: Deposit is non-refundable</li>
-      </ul>
+      <p>Total: $<span id="total">0</span></p>
+      <p>20% Deposit: $<span id="deposit">0</span></p>
+      <button type="button" id="stripe-button">Pay 20% Deposit</button>
     </div>
 
   </div>
@@ -136,7 +126,17 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Safe & Secure Mobile Notary | All Rights Reserved</p>
+  <div>
+    📞 <a href="tel:7039670674">703-967-0674</a> |
+    📧 <a href="mailto:info@safeandsecuremobilenotary.com">info@safeandsecuremobilenotary.com</a> |
+    🌐 <a href="https://safeandsecuremobilenotary.com" target="_blank">safeandsecuremobilenotary.com</a>
+  </div>
+  <div style="margin-top:10px;">
+    📘 <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+    📸 <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    💼 <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+  </div>
+  <p style="margin-top:15px;">© 2026 Safe & Secure Mobile Notary | Springfield, VA</p>
 </footer>
 
 </body>
