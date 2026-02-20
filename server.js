@@ -1,24 +1,30 @@
+// server.js
 const express = require("express");
 const cors = require("cors");
 const Stripe = require("stripe");
 require("dotenv").config();
 
 const app = express();
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY); // Your test secret key
 
-// Update CORS to match your frontend URL (Live Server or localhost)
+// Stripe instance
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY); // Make sure this is your LIVE key in Render
+
+// CORS: allow your live frontend domain
 app.use(cors({
   origin: [
-    "http://127.0.0.1:5500", // if using Live Server
-    "http://localhost:5500",
-    "http://localhost:3000" // optional if you serve frontend from Express
+    "https://safeandsecuremobilenotary.com/", // replace with your frontend URL
   ]
 }));
 
 app.use(express.json());
 
+// Endpoint to create Stripe checkout session
 app.post("/create-checkout-session", async (req, res) => {
   const { amount, customerName, customerEmail, services } = req.body;
+
+  if (!amount || !customerName || !customerEmail) {
+    return res.status(400).json({ error: "Missing required fields." });
+  }
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -32,23 +38,24 @@ app.post("/create-checkout-session", async (req, res) => {
               name: "Notary Service Deposit (20%)",
               description: `Client: ${customerName}\nServices: ${services.join(", ")}`
             },
-            unit_amount: amount, // amount in cents
+            unit_amount: amount,
           },
           quantity: 1,
-        },
+        }
       ],
       mode: "payment",
-      success_url: "http://127.0.0.1:5500/success.html",
-      cancel_url: "http://127.0.0.1:5500/booking.html",
+      success_url: "https://safeandsecuremobilenotary.com/success.html",
+      cancel_url: "https://safeandsecuremobilenotary.com/booking.html",
     });
 
     res.json({ id: session.id });
 
   } catch (err) {
     console.error("Stripe Error:", err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: "Payment session failed" });
   }
 });
 
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
