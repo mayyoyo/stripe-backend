@@ -12,7 +12,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY); // Make sure this is your 
 // CORS: allow your live frontend domain
 app.use(cors({
   origin: [
-    "https://safeandsecuremobilenotary.com/", // replace with your frontend URL
+    "https://safeandsecuremobilenotary.com", // replace with your frontend URL
   ]
 }));
 
