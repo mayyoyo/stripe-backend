@@ -11,8 +11,7 @@
 body {
     line-height: 1.6;
     color: #333;
-    /* background-color: #f5f5f5; */
-      background-color: #5279b5;
+    background-color: #5279b5;
 }
 
 a {
@@ -148,6 +147,21 @@ nav ul.nav-links li a:hover {
     font-size: 1.2em;
 }
 
+.hero-content a.button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #2196F3;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1em;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.hero-content a.button:hover {
+    background-color: #0b7dda;
+}
+
 /* ==========================
    CARDS / CONTENT SECTIONS
 ========================== */
@@ -254,6 +268,8 @@ footer a {
 /* ==========================
    RESPONSIVE
 ========================== */
+
+/* Tablet Navigation */
 @media (max-width: 1024px) {
     nav ul.nav-links {
         flex-direction: column;
@@ -275,23 +291,46 @@ footer a {
     .hamburger {
         display: flex;
     }
+
+    /* SERVICE PAGES GRID FIX */
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 20px;
+        justify-items: center;
+    }
 }
 
+/* Mobile Layout */
 @media (max-width: 768px) {
     .cards-container {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
+        padding: 15px;
     }
 
     .modern-card {
-        max-width: 90%;
+        max-width: 100%;
+        flex: unset;
+        margin: 0 auto;
+    }
+
+    .hero {
+        height: 50vh;
     }
 
     .hero-content h1 {
-        font-size: 2em;
+        font-size: 1.6rem;
     }
 
     .hero-content p {
-        font-size: 1em;
+        font-size: 0.95rem;
+    }
+
+    .hero-content a.button {
+        width: 100%;
+        display: block;
+        margin-top: 10px;
     }
 }
+

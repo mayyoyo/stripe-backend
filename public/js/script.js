@@ -98,3 +98,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   calculateTotal();
 });
+// 
+// document.addEventListener("DOMContentLoaded", () => {
+
+//   const hamburger = document.querySelector(".hamburger");
+//   const navLinks = document.querySelector(".nav-links");
+
+//   if (hamburger && navLinks) {
+
+//     // Toggle menu
+//     hamburger.addEventListener("click", () => {
+//       navLinks.classList.toggle("active");
+//     });
+
+//     // Close menu after clicking a link (mobile fix)
+//     document.querySelectorAll(".nav-links a").forEach(link => {
+//       link.addEventListener("click", () => {
+//         navLinks.classList.remove("active");
+//       });
+//     });
+
+//   }
+
+// });
+
+// Close menu when clicking a link (mobile UX fix)
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("active");
+  });
+});
