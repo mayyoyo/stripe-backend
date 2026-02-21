@@ -1,118 +1,128 @@
 // script.js
 document.addEventListener("DOMContentLoaded", () => {
 
-  // --- MOBILE HAMBURGER MENU ---
-  const hamburger = document.querySelector(".hamburger");
-  const navLinks = document.querySelector(".nav-links");
-
-  if (hamburger && navLinks) {
-    hamburger.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
-    });
-
-    // Close nav when clicking a link (mobile UX)
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("active");
-      });
-    });
-  }
-
-  // --- BOOKING PAGE SPECIFIC ---
+  // --- Fill Time Dropdown ---
   const bookingTime = document.getElementById("booking-time");
+  const times = [
+    "09:00 AM","10:00 AM","11:00 AM","12:00 PM",
+    "01:00 PM","02:00 PM","03:00 PM","04:00 PM","05:00 PM"
+  ];
+  times.forEach(t => {
+    const option = document.createElement("option");
+    option.value = t;
+    option.textContent = t;
+    bookingTime.appendChild(option);
+  });
+
+  // --- Stripe Payment ---
   const payBtn = document.getElementById("stripe-button");
+  if (!payBtn) return;
 
-  if (bookingTime) {
-    // Fill Time Dropdown
-    const times = ["09:00 AM","10:00 AM","11:00 AM","12:00 PM","01:00 PM","02:00 PM","03:00 PM","04:00 PM","05:00 PM"];
-    times.forEach(t => {
-      const option = document.createElement("option");
-      option.value = t;
-      option.textContent = t;
-      bookingTime.appendChild(option);
-    });
-  }
+  // Replace with your LIVE or TEST Stripe public key
+  const stripe = Stripe("pk_live_51Nwbk6BdpYMd8RZYKtCvz8VPQjFQCZbmcJ3y3tj2bNxyAd4xv9Ey3fnREYyYeTbR0i26CdD3W5VUiYdJizmLP4J000bNKolpY3");
 
-  if (payBtn) {
-    // Stripe setup (replace with your LIVE key)
-    const stripe = Stripe("pk_live_51Nwbk6BdpYMd8RZYKtCvz8VPQjFQCZbmcJ3y3tj2bNxyAd4xv9Ey3fnREYyYeTbR0i26CdD3W5VUiYdJizmLP4J000bNKolpY3");
+  // --- Calculate total & deposit ---
+  function calculateTotal() {
+    let total = 0;
 
-    // Calculate total & deposit
-    function calculateTotal() {
-      let total = 0;
+    document.querySelectorAll(".service:checked").forEach(cb => total += parseInt(cb.dataset.price));
+    document.querySelectorAll(".convenience:checked").forEach(cb => total += parseInt(cb.dataset.price));
 
-      document.querySelectorAll(".service:checked").forEach(cb => total += parseInt(cb.dataset.price));
-      document.querySelectorAll(".convenience:checked").forEach(cb => total += parseInt(cb.dataset.price));
-
-      const travel = document.getElementById("travelDistance");
-      if (travel) total += parseInt(travel.selectedOptions[0].dataset.price || 0);
-
-      document.getElementById("total").textContent = total;
-      document.getElementById("deposit").textContent = Math.ceil(total * 0.2);
-
-      return total;
+    const travel = document.getElementById("travelDistance");
+    if (travel && travel.selectedOptions.length > 0) {
+      total += parseInt(travel.selectedOptions[0].dataset.price || 0);
     }
 
-    // Event listeners for changes
-    document.querySelectorAll(".service, .convenience, #travelDistance")
-      .forEach(el => el.addEventListener("change", calculateTotal));
+    document.getElementById("total").textContent = total;
+    document.getElementById("deposit").textContent = Math.ceil(total * 0.2);
 
-    calculateTotal();
+    return total;
+  }
 
-    // Payment button click
-    payBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
+  document.querySelectorAll(".service, .convenience, #travelDistance")
+    .forEach(el => el.addEventListener("change", calculateTotal));
 
-      const total = calculateTotal();
-      const deposit = Math.ceil(total * 0.2);
-      const amountInCents = deposit * 100;
+  // --- Payment button click ---
+  payBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const date = document.getElementById("booking-date").value;
-      const time = document.getElementById("booking-time").value;
+    const total = calculateTotal();
+    const deposit = Math.ceil(total * 0.2);
+    const amountInCents = deposit * 100;
 
-      if (!name || !email || !date || !time) {
-        alert("Please fill in Name, Email, Date, and Time.");
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const date = document.getElementById("booking-date").value;
+    const time = document.getElementById("booking-time").value;
+
+    if (!name || !email || !date || !time) {
+      alert("Please fill in Name, Email, Date, and Time.");
+      return;
+    }
+
+    // Gather selected services and fees
+    const services = [
+      ...document.querySelectorAll(".service:checked"),
+      ...document.querySelectorAll(".convenience:checked")
+    ].map(cb => cb.nextSibling.textContent.trim());
+
+    const travelOption = document.getElementById("travelDistance").selectedOptions[0];
+    if (travelOption) services.push(travelOption.textContent.trim());
+
+    console.log("Booking Info:", { name, email, date, time, services, deposit });
+
+    try {
+      const response = await fetch("https://stripe-backend-5-qp5u.onrender.com/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: amountInCents,
+          customerName: name,
+          customerEmail: email,
+          services: services,
+          bookingDate: date,
+          bookingTime: time
+        })
+      });
+
+      if (!response.ok) {
+        const text = await response.text();
+        console.error("Stripe backend response not OK:", response.status, text);
+        alert("Payment session failed. Check console for details.");
         return;
       }
 
-      // Gather selected services
-      const services = [
-        ...document.querySelectorAll(".service:checked"),
-        ...document.querySelectorAll(".convenience:checked")
-      ].map(cb => cb.nextSibling.textContent.trim());
+      const data = await response.json();
+      console.log("Stripe session response:", data);
 
-      const travelOption = document.getElementById("travelDistance").selectedOptions[0];
-      if (travelOption) services.push(travelOption.textContent.trim());
-
-      try {
-        const response = await fetch("https://stripe-backend-5-qp5u.onrender.com/create-checkout-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            amount: amountInCents,
-            customerName: name,
-            customerEmail: email,
-            services: services,
-            bookingDate: date,
-            bookingTime: time
-          })
-        });
-
-        const data = await response.json();
-
-        if (data.id) {
-          stripe.redirectToCheckout({ sessionId: data.id });
-        } else {
-          alert("Payment session failed.");
+      if (data.id) {
+        // Redirect to Stripe checkout
+        const result = await stripe.redirectToCheckout({ sessionId: data.id });
+        if (result.error) {
+          console.error("Stripe redirect error:", result.error.message);
+          alert("Payment error: " + result.error.message);
         }
-
-      } catch (err) {
-        console.error("Payment Error:", err);
-        alert("Payment error. Please try again.");
+      } else {
+        console.error("Stripe session ID missing:", data);
+        alert("Payment session failed. Session ID missing.");
       }
-    });
-  }
+
+    } catch (err) {
+      console.error("Payment request error:", err);
+      alert("Payment error. Please check console and try again.");
+    }
+  });
+
+  // --- Initialize total calculation ---
+  calculateTotal();
+
+  // --- Mobile nav hamburger fix ---
+  const navLinks = document.querySelector(".nav-links");
+  document.querySelector(".hamburger").addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => navLinks.classList.remove("active"));
+  });
 
 });
