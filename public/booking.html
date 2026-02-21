@@ -4,9 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Booking | Safe & Secure Mobile Notary</title>
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Stripe -->
 <script src="https://js.stripe.com/v3/"></script>
+
+<!-- IMPORTANT: keep defer -->
 <script src="js/script.js" defer></script>
 </head>
 <body>
@@ -16,18 +21,21 @@
   📞 <a href="tel:7039670674">703-967-0674</a> |
   📧 <a href="mailto:info@safeandsecuremobilenotary.com">info@safeandsecuremobilenotary.com</a> |
   🌐 <a href="https://safeandsecuremobilenotary.com" target="_blank">safeandsecuremobilenotary.com</a> |
-  📘 <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-  📸 <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-  💼 <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+  📘 <a href="#"><i class="fa-brands fa-facebook"></i></a>
+  📸 <a href="#"><i class="fa-brands fa-instagram"></i></a>
+  💼 <a href="#"><i class="fa-brands fa-linkedin"></i></a>
 </div>
 
 <!-- HEADER -->
 <header>
   <div class="header-container">
     <div class="logo">
-      <a href="index.html"><img src="images/logo.png" alt="Logo" class="logo-img"></a>
+      <a href="index.html">
+        <img src="images/logo.png" alt="Logo" class="logo-img">
+      </a>
       Safe & Secure Mobile Notary
     </div>
+
     <nav>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
@@ -38,8 +46,12 @@
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active');">
-        <div></div><div></div><div></div>
+
+      <!-- FIXED: removed inline onclick -->
+      <div class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     </nav>
   </div>
@@ -132,9 +144,9 @@
     🌐 <a href="https://safeandsecuremobilenotary.com" target="_blank">safeandsecuremobilenotary.com</a>
   </div>
   <div style="margin-top:10px;">
-    📘 <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-    📸 <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-    💼 <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+    📘 <a href="#"><i class="fa-brands fa-facebook"></i></a>
+    📸 <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    💼 <a href="#"><i class="fa-brands fa-linkedin"></i></a>
   </div>
   <p style="margin-top:15px;">© 2026 Safe & Secure Mobile Notary | Springfield, VA</p>
 </footer>
